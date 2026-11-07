@@ -1,0 +1,481 @@
+i<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10172b">
+<title>Busca Divina - O Clamor de uma Alma</title>
+<meta name="description" content="Uma jornada de fé, conhecimento bíblico, oração e descoberta da Palavra de Deus.">
+
+<style>
+:root {
+  --bg:#10172b;
+  --card:#1b2742;
+  --gold:#e8bd65;
+  --white:#ffffff;
+  --muted:#bdc8da;
+  --blue:#536fe8;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  line-height:1.6;
+}
+header {
+  padding:24px 16px;
+  text-align:center;
+  background:linear-gradient(135deg,#10172b,#263d68);
+  border-bottom:2px solid var(--gold);
+}
+.logo {font-size:38px}
+header h1 {color:var(--gold);margin:5px}
+header p {color:var(--muted)}
+nav {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:12px;
+  background:#17223b;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+button,select {
+  border:0;
+  border-radius:9px;
+  padding:11px 15px;
+  cursor:pointer;
+  font-weight:bold;
+}
+nav button {
+  background:#293957;
+  color:white;
+}
+nav button:hover {background:var(--blue)}
+select {background:white;color:#17223b}
+main {
+  max-width:1050px;
+  margin:auto;
+  padding:20px 15px;
+}
+section {margin-bottom:30px}
+.hero {
+  text-align:center;
+  padding:45px 20px;
+  background:linear-gradient(140deg,#263d68,#17223b);
+  border-radius:18px;
+}
+.hero h2 {font-size:29px;color:var(--gold)}
+.hero p {color:var(--muted)}
+.primary {
+  background:var(--gold);
+  color:#182039;
+  margin:6px;
+}
+.card {
+  background:var(--card);
+  padding:20px;
+  border-radius:15px;
+  margin:12px 0;
+  border:1px solid #344564;
+}
+.card h3 {color:var(--gold)}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+.muted {color:var(--muted)}
+.hidden {display:none}
+input,textarea {
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border-radius:8px;
+  border:1px solid #53617a;
+  background:#10172b;
+  color:white;
+}
+.action {
+  background:var(--blue);
+  color:white;
+  margin-top:8px;
+}
+#feedback {color:var(--gold);font-weight:bold}
+footer {
+  text-align:center;
+  padding:25px;
+  background:#0b1020;
+  color:var(--muted);
+}
+.progress {
+  height:12px;
+  background:#39445c;
+  border-radius:20px;
+  overflow:hidden;
+}
+#progressBar {
+  height:100%;
+  width:0;
+  background:var(--gold);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">✝️</div>
+  <h1>BUSCA DIVINA</h1>
+  <p>O Clamor de uma Alma</p>
+  <p>Conhecer a Palavra. Fortalecer a Fé. Transformar Vidas.</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">Início</button>
+  <button onclick="showPage('bible')">Bíblia</button>
+  <button onclick="showPage('journey')">Jornada</button>
+  <button onclick="showPage('adventure')">Aventuras</button>
+  <button onclick="showPage('quiz')">Jogos</button>
+  <button onclick="showPage('prayer')">Oração</button>
+</nav>
+
+<main>
+
+<section id="home">
+  <div class="hero">
+    <h2>Bem-vindo à Busca Divina</h2>
+    <p>Uma caminhada espiritual para quem deseja conhecer Deus e compreender melhor a Bíblia.</p>
+    <button class="primary" onclick="showPage('journey')">Começar a jornada</button>
+    <button class="primary" onclick="showPage('quiz')">Testar conhecimentos</button>
+  </div>
+
+  <div class="card">
+    <h3>🌅 Mensagem do dia</h3>
+    <p id="dailyVerse"></p>
+    <p class="muted" id="dailyReference"></p>
+    <button class="action" onclick="newVerse()">Outra mensagem</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>📖 Palavra de Deus</h3>
+      <p>Descobre ensinamentos e histórias bíblicas.</p>
+      <button class="action" onclick="showPage('bible')">Explorar</button>
+    </div>
+    <div class="card">
+      <h3>🏆 Conhecimento</h3>
+      <p>Responde às perguntas e ganha pontos.</p>
+      <button class="action" onclick="showPage('quiz')">Jogar</button>
+    </div>
+    <div class="card">
+      <h3>🙏 Vida espiritual</h3>
+      <p>Encontra um espaço para reflexão e oração.</p>
+      <button class="action" onclick="showPage('prayer')">Entrar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>O teu progresso</h3>
+    <p>Pontos conquistados: <strong id="points">0</strong></p>
+    <p>Episódios concluídos: <strong id="completed">0</strong> de 12</p>
+    <div class="progress"><div id="progressBar"></div></div>
+    <p class="muted">O progresso fica guardado neste dispositivo.</p>
+  </div>
+</section>
+
+<section id="bible" class="hidden">
+  <h2>📖 Biblioteca Bíblica</h2>
+  <div class="card">
+    <h3>Antigo Testamento</h3>
+    <p>Génesis, Êxodo, Salmos, Provérbios, Isaías e muitos outros livros.</p>
+    <p><strong>Génesis 1:1</strong></p>
+    <p>No princípio, Deus criou os céus e a terra.</p>
+  </div>
+  <div class="card">
+    <h3>Novo Testamento</h3>
+    <p>Mateus, Marcos, Lucas, João, Atos, Romanos e Apocalipse.</p>
+    <p><strong>João 3:16</strong></p>
+    <p>Deus demonstrou o seu amor pelo mundo, oferecendo o seu Filho para que os que nele creem tenham vida eterna.</p>
+  </div>
+  <div class="card">
+    <h3>Salmos 23:1</h3>
+    <p>O Senhor é o meu pastor; nada me faltará.</p>
+  </div>
+  <p class="muted">Esta é uma seleção demonstrativa de passagens. Uma Bíblia integral deverá ser adicionada com uma tradução devidamente autorizada.</p>
+</section>
+
+<section id="journey" class="hidden">
+  <h2>🌍 Viagem pela Bíblia — 12 episódios</h2>
+  <p>Descobre a história bíblica passo a passo.</p>
+  <div id="episodes" class="grid"></div>
+</section>
+
+<section id="adventure" class="hidden">
+  <h2>⚔️ Aventuras Bíblicas</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Moisés</h3>
+      <p>Descobre a libertação do povo de Israel e a travessia do mar.</p>
+      <p>Referência: Êxodo 3–14.</p>
+    </div>
+    <div class="card">
+      <h3>David</h3>
+      <p>Conhece a coragem de um jovem que enfrentou Golias.</p>
+      <p>Referência: 1 Samuel 17.</p>
+    </div>
+    <div class="card">
+      <h3>Daniel</h3>
+      <p>Aprende sobre a fidelidade de Daniel na cova dos leões.</p>
+      <p>Referência: Daniel 6.</p>
+    </div>
+    <div class="card">
+      <h3>Jesus</h3>
+      <p>Conhece os ensinamentos, milagres, morte e ressurreição de Jesus.</p>
+      <p>Referência: Evangelhos.</p>
+    </div>
+    <div class="card">
+      <h3>Paulo</h3>
+      <p>Descobre a transformação de Paulo e as suas viagens missionárias.</p>
+      <p>Referência: Atos 9–28.</p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="hidden">
+  <h2>🧠 Desafio Bíblico</h2>
+  <div class="card">
+    <label for="level">Escolhe o nível:</label>
+    <select id="level" onchange="startQuiz()">
+      <option value="beginner">Iniciante</option>
+      <option value="intermediate">Intermédio</option>
+      <option value="advanced">Avançado</option>
+    </select>
+    <h3 id="question">Carrega em começar.</h3>
+    <div id="answers"></div>
+    <p id="feedback"></p>
+    <p>Pontos: <strong id="quizPoints">0</strong></p>
+    <button class="action" onclick="startQuiz()">Começar / Reiniciar</button>
+  </div>
+</section>
+
+<section id="prayer" class="hidden">
+  <h2>🙏 Espaço de Oração</h2>
+  <div class="card">
+    <h3>Momento de reflexão</h3>
+    <p>Reserva um momento de silêncio. Fala com Deus com sinceridade e coloca diante dele as tuas preocupações.</p>
+    <p><strong>Filipenses 4:6</strong> — A Palavra ensina a apresentar os nossos pedidos a Deus em oração.</p>
+  </div>
+  <div class="card">
+    <h3>A minha oração</h3>
+    <textarea id="prayerText" rows="5" placeholder="Escreve aqui a tua oração..."></textarea>
+    <button class="action" onclick="savePrayer()">Guardar neste dispositivo</button>
+    <p id="prayerFeedback"></p>
+    <p class="muted">As orações são guardadas apenas no navegador deste dispositivo. Não são enviadas para um servidor.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>✝️ BUSCA DIVINA — O Clamor de uma Alma</p>
+  <p>Fé • Conhecimento • Esperança • Amor</p>
+  <p>© 2026 Busca Divina</p>
+</footer>
+
+<script>
+const translations = {
+  pt: {
+    title:"BUSCA DIVINA",
+    welcome:"Bem-vindo à Busca Divina",
+    start:"Começar a jornada"
+  },
+  en: {
+    title:"DIVINE SEARCH",
+    welcome:"Welcome to Divine Search",
+    start:"Start the journey"
+  },
+  es: {
+    title:"BÚSQUEDA DIVINA",
+    welcome:"Bienvenido a Búsqueda Divina",
+    start:"Comenzar el viaje"
+  }
+};
+
+const episodes = [
+  ["A criação","Deus cria os céus e a terra.","Génesis 1–2"],
+  ["Noé e a arca","A história de Noé e o dilúvio.","Génesis 6–9"],
+  ["Abraão","A fé e a promessa de Deus.","Génesis 12–22"],
+  ["José","A história de José e o perdão.","Génesis 37–50"],
+  ["Moisés","A libertação de Israel do Egito.","Êxodo 1–14"],
+  ["Os Dez Mandamentos","As orientações dadas a Moisés.","Êxodo 20"],
+  ["A conquista de Canaã","Josué conduz o povo.","Josué 1–6"],
+  ["David e Golias","A coragem diante dos desafios.","1 Samuel 17"],
+  ["Daniel","A fidelidade na cova dos leões.","Daniel 6"],
+  ["Nascimento de Jesus","A chegada do Salvador.","Lucas 1–2"],
+  ["Vida de Jesus","Os ensinamentos e milagres de Jesus.","Mateus–João"],
+  ["A Igreja e a esperança","Os apóstolos e a promessa da vida eterna.","Atos–Apocalipse"]
+];
+
+const verses = [
+ ["Confia no Senhor de todo o teu coração.","Provérbios 3:5"],
+ ["O Senhor é o meu pastor; nada me faltará.","Salmos 23:1"],
+ ["Tudo posso naquele que me fortalece.","Filipenses 4:13"],
+ ["Deus é amor.","1 João 4:8"],
+ ["O amor é paciente e bondoso.","1 Coríntios 13:4"]
+];
+
+let points = Number(localStorage.getItem("bd_points") || 0);
+let completed = JSON.parse(localStorage.getItem("bd_completed") || "[]");
+
+function showPage(page) {
+ document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
+ document.getElementById(page).classList.remove("hidden");
+ window.scrollTo(0,0);
+ updateProgress();
+}
+
+function updateProgress() {
+ document.getElementById("points").textContent=points;
+ document.getElementById("completed").textContent=completed.length;
+ document.getElementById("progressBar").style.width=(completed.length/12*100)+"%";
+}
+
+function newVerse() {
+ const v=verses[Math.floor(Math.random()*verses.length)];
+ document.getElementById("dailyVerse").textContent=v[0];
+ document.getElementById("dailyReference").textContent=v[1];
+}
+newVerse();
+
+function renderEpisodes() {
+ const container=document.getElementById("episodes");
+ episodes.forEach((ep,i)=>{
+  const done=completed.includes(i);
+  const card=document.createElement("div");
+  card.className="card";
+  const title=document.createElement("h3");
+  title.textContent=(i+1)+". "+ep[0];
+  const description=document.createElement("p");
+  description.textContent=ep[1];
+  const reference=document.createElement("p");
+  reference.textContent="Leitura: "+ep[2];
+  const button=document.createElement("button");
+  button.className="action";
+  button.textContent=done?"Concluído ✓":"Concluir episódio";
+  button.disabled=done;
+  button.onclick=()=>completeEpisode(i);
+  card.append(title,description,reference,button);
+  container.appendChild(card);
+ });
+}
+function completeEpisode(i) {
+ if(!completed.includes(i)) {
+  completed.push(i);
+  points+=10;
+  localStorage.setItem("bd_completed",JSON.stringify(completed));
+  localStorage.setItem("bd_points",points);
+  document.getElementById("quizPoints").textContent=points;
+  document.getElementById("episodes").innerHTML="";
+  renderEpisodes();
+  updateProgress();
+ }
+}
+renderEpisodes();
+
+const questions={
+ beginner:[
+  ["Quem construiu a arca?","Noé",["Moisés","Noé","David"]],
+  ["Quem foi a mãe de Jesus?","Maria",["Marta","Maria","Ester"]],
+  ["Onde nasceu Jesus?","Belém",["Jerusalém","Belém","Roma"]]
+ ],
+ intermediate:[
+  ["Quem derrotou Golias?","David",["Saul","David","Salomão"]],
+  ["Quem foi lançado na cova dos leões?","Daniel",["Pedro","Daniel","Paulo"]],
+  ["Quantos discípulos Jesus escolheu?","12",["7","10","12"]]
+ ],
+ advanced:[
+  ["Quem foi o primeiro rei de Israel?","Saul",["David","Saul","Salomão"]],
+  ["Quem escreveu muitas cartas do Novo Testamento?","Paulo",["Moisés","Paulo","Josué"]],
+  ["Em que ilha João recebeu a revelação do Apocalipse?","Patmos",["Creta","Patmos","Chipre"]]
+ ]
+};
+
+let quizIndex=0;
+let quizList=[];
+let quizScore=0;
+let answered=false;
+
+function startQuiz() {
+ const level=document.getElementById("level").value;
+ quizList=questions[level];
+ quizIndex=0;
+ quizScore=0;
+ document.getElementById("quizPoints").textContent=points;
+ showQuestion();
+}
+function showQuestion() {
+ answered=false;
+ const q=quizList[quizIndex];
+ document.getElementById("feedback").textContent="";
+ document.getElementById("question").textContent=q[0];
+ const area=document.getElementById("answers");
+ area.innerHTML="";
+ q[2].forEach(option=>{
+  const b=document.createElement("button");
+  b.className="action";
+  b.style.display="block";
+  b.style.width="100%";
+  b.style.margin="8px 0";
+  b.textContent=option;
+  b.onclick=()=>answer(option);
+  area.appendChild(b);
+ });
+}
+function answer(option) {
+ if(answered)return;
+ answered=true;
+ const q=quizList[quizIndex];
+ if(option===q[1]) {
+  quizScore+=10;
+  points+=10;
+  localStorage.setItem("bd_points",points);
+  document.getElementById("feedback").textContent="Muito bem! Resposta correta. +10 pontos!";
+ } else {
+  document.getElementById("feedback").textContent="Resposta incorreta. A resposta certa é: "+q[1];
+ }
+ document.getElementById("quizPoints").textContent=points;
+ updateProgress();
+ quizIndex++;
+ if(quizIndex<quizList.length) {
+  const next=document.createElement("button");
+  next.className="primary";
+  next.textContent="Próxima pergunta";
+  next.onclick=showQuestion;
+  document.getElementById("answers").appendChild(next);
+ } else {
+  document.getElementById("question").textContent="Desafio terminado!";
+  document.getElementById("feedback").textContent+=" Resultado: "+quizScore+" pontos nesta partida.";
+  document.getElementById("answers").innerHTML="";
+ }
+}
+
+function savePrayer() {
+ const value=document.getElementById("prayerText").value.trim();
+ if(!value) {
+  document.getElementById("prayerFeedback").textContent="Escreve primeiro a tua oração.";
+  return;
+ }
+ localStorage.setItem("bd_prayer",value);
+ document.getElementById("prayerFeedback").textContent="A tua oração foi guardada neste dispositivo.";
+}
+
+document.getElementById("prayerText").value=localStorage.getItem("bd_prayer")||"";
+updateProgress();
+</script>
+</body>
+</html>ndex.html
