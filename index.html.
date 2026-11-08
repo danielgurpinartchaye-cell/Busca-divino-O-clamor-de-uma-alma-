@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07152e">
+  <meta name="description" content="Busca Divina — O Clamor de uma Alma. Um espaço de fé, oração, estudo bíblico e crescimento espiritual.">
+
+  <title>Busca Divina — O Clamor de uma Alma</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <header class="header">
+    <h1>✦ Busca Divina ✦</h1>
+    <p>O Clamor de uma Alma</p>
+    <p id="date"></p>
+    <p id="connection">A verificar ligação...</p>
+  </header>
+
+  <nav class="navigation">
+    <button class="nav-btn active" data-page="home">Início</button>
+    <button class="nav-btn" data-page="bible">Bíblia</button>
+    <button class="nav-btn" data-page="studies">Estudos</button>
+    <button class="nav-btn" data-page="games">Jogos</button>
+    <button class="nav-btn" data-page="prayers">Orações</button>
+    <button class="nav-btn" data-page="songs">Louvores</button>
+    <button class="nav-btn" data-page="diary">Diário</button>
+    <button class="nav-btn" data-page="about">Sobre</button>
+  </nav>
+
+  <main>
+    <section id="home" class="page active">
+      <h2>Bem-vindo à Busca Divina</h2>
+      <p>Uma jornada de fé, conhecimento e comunhão com Deus.</p>
+      <p>Alimenta a tua alma com a Palavra de Deus.</p>
+    </section>
+
+    <section id="bible" class="page">
+      <h2>Bíblia Sagrada</h2>
+      <div id="verses"></div>
+    </section>
+
+    <section id="studies" class="page">
+      <h2>Estudos Bíblicos</h2>
+      <div id="studies-content"></div>
+    </section>
+
+    <section id="games" class="page">
+      <h2>Jogos Bíblicos</h2>
+      <div id="game-content"></div>
+    </section>
+
+    <section id="prayers" class="page">
+      <h2>Orações</h2>
+      <div id="prayers-content"></div>
+    </section>
+
+    <section id="songs" class="page">
+      <h2>Louvores</h2>
+      <div id="songs-content"></div>
+    </section>
+
+    <section id="diary" class="page">
+      <h2>Diário Espiritual</h2>
+      <textarea id="diary-entry" placeholder="Escreve aqui a tua reflexão..."></textarea>
+      <button id="save-diary">Guardar reflexão</button>
+      <div id="diary-content"></div>
+    </section>
+
+    <section id="about" class="page">
+      <h2>Sobre o projeto</h2>
+      <p>Busca Divina — O Clamor de uma Alma.</p>
+      <p>Um espaço para crescer na fé, estudar a Bíblia e fortalecer a vida espiritual.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Busca Divina © 2026</p>
+    <p>Que a Palavra ilumine o teu caminho.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
